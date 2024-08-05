@@ -1,0 +1,23 @@
+Simple Calculator in C
+
+Overview
+This program is a simple command-line calculator written in C that performs basic arithmetic operations. It takes two floating-point numbers and an operator as input, processes the calculation based on the operator, and outputs the result.
+
+=> int main(int argc, char *argv[]): The main function where execution begins. The parameters argc and argv are used for command-line argument handling (not utilized in this program).
+=> float valueOne, valueTwo: Variables to store the two input numbers.
+=> char operator: Variable to store the operator character (+, -, *, /, ^, or space for square root).
+=> float answer: Variable to store the result of the calculation.
+
+switch(operator): A switch statement is used to determine which operation to perform based on the operator entered by the user.
+
+case '/': Division of valueOne by valueTwo.
+case '*': Multiplication of valueOne and valueTwo.
+case '+': Addition of valueOne and valueTwo.
+case '-': Subtraction of valueTwo from valueOne.
+case '^': Exponentiation, raising valueOne to the power of valueTwo using pow function.
+case ' ': Square root of valueTwo using the sqrt function.
+default: If an invalid operator is entered, the program goes to the fail label.
+
+
+printf: Outputs the calculation and the result with a precision of up to 9 significant digits for the input and 6 significant digits for the result.
+goto exit;: Jumps to the exit label for program termination.
