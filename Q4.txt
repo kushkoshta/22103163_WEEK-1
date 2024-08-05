@@ -1,0 +1,35 @@
+Manacher's Algorithm for Longest Palindromic Substring
+
+Overview
+This implementation uses Manacher's algorithm to compute the length of the longest palindromic substring for every possible center in a given input string. The algorithm efficiently calculates these lengths in linear time, making it suitable for long strings.
+
+Function: 'manacher'
+
+vector <int> manacher(char *str){ /// hash = 784265
+    int i, j, k, l = strlen(str), n = l << 1;
+    vector <int> pal(n);
+
+    for (i = 0, j = 0, k = 0; i < n; j = max(0, j - k), i += k){
+        while (j <= i && (i + j + 1) < n && str[(i - j) >> 1] == str[(i + j + 1) >> 1]) j++;
+        for (k = 1, pal[i] = j; k <= i && k <= pal[i] && (pal[i] - k) != pal[i - k]; k++){
+            pal[i + k] = min(pal[i - k], pal[i] - k);
+        }
+    }
+
+    pal.pop_back();
+    return pal;
+}
+
+
+=> manacher(char *str): Takes a C-style string str as input and returns a vector containing the lengths of the longest palindromic substrings centered at each position.
+=> l = strlen(str): Computes the length of the input string.
+=> n = l << 1: Computes twice the length of the string, considering even and odd positions as potential centers for palindromes.
+=> vector<int> pal(n): Initializes a vector pal of size n to store palindrome lengths.
+
+=> Outer Loop (for (i = 0, j = 0, k = 0; i < n; j = max(0, j - k), i += k)): Iterates over each center position i in the transformed array.
+=> Inner Loop (while): Expands around the center i as long as the characters match on both sides, incrementing j which represents the current palindrome radius.
+=> Inner For Loop: Updates the palindrome lengths for the positions following i using symmetry properties. It continues until a mismatch is found or the palindrome boundaries are crossed.
+
+
+=> pal.pop_back();: Removes the last element to match the number of centers in the original string.
+=> return pal;: Returns the computed palindrome lengths.
